@@ -1,13 +1,13 @@
 package sudokudemo.buildlogic;
 
+import java.io.IOException;
+
 import sudokudemo.computationlogic.GameLogic;
 import sudokudemo.persistence.LocalStorageImpl;
 import sudokudemo.problemdomain.IStorage;
 import sudokudemo.problemdomain.SudokuGame;
 import sudokudemo.userinterface.IUserInterfaceContract;
 import sudokudemo.userinterface.logic.ControlLogic;
-
-import java.io.IOException;
 
 public class SudokuBuildLogic {
 
@@ -20,9 +20,8 @@ public class SudokuBuildLogic {
         IStorage storage = new LocalStorageImpl();
 
         try {
-            //will throw if no game data is found in local storage
-
-            initialState = storage.getGameData();
+        	initialState = GameLogic.getNewGame();
+            storage.updateGameData(initialState);
         } catch (IOException e) {
 
             initialState = GameLogic.getNewGame();
